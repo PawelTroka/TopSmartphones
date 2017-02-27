@@ -1,0 +1,97 @@
+﻿<Window x:Class="TopSmartphones.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="TopSmartphones - PLA.NET - Paweł Troka, 132334" Height="461.2" Width="661.621" ResizeMode="CanMinimize"
+        Cursor="Arrow" Icon="Images/Samsung-Galaxy-S5-0.jpg" Background="White" WindowStyle="ThreeDBorderWindow"
+        BorderThickness="0">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="Calibri" />
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+
+        <Style
+            TargetType="MenuItem"
+            x:Key="MenuTitleText">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="BorderBrush" Value="#FFFF00E8" />
+            <Setter Property="Background" Value="#FF0599AF" />
+            <Setter Property="Foreground" Value="Aqua" />
+
+            <!--Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Red"/>
+                </Trigger>
+            </-->
+        </Style>
+
+    </Window.Resources>
+
+
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <Menu.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#FFF6F6F6" Offset="0.25" />
+                    <GradientStop Color="#FFFF00FA" Offset="0.659" />
+                    <GradientStop Color="#FFDCD9D9" Offset="0.8" />
+                    <GradientStop Color="#FFB8B8B8" Offset="1" />
+                </LinearGradientBrush>
+            </Menu.Background>
+            <DockPanel>
+                <MenuItem Style="{StaticResource MenuTitleText}" x:Name="AddMenuItem" Header="Add new"
+                          Click="AddMenuItem_OnClick" />
+                <MenuItem Style="{StaticResource MenuTitleText}" x:Name="EditListMenuItem" Header="Compare selected"
+                          Click="EditListMenuItem_Click" />
+                <MenuItem Style="{StaticResource MenuTitleText}" x:Name="EditItemsMenuItem" Header="Edit selected item"
+                          Click="EditItemsMenuItem_Click" />
+                <MenuItem Style="{StaticResource MenuTitleText}" x:Name="AboutMenuItem" Header="About"
+                          Click="AboutMenuItem_Click" />
+
+            </DockPanel>
+        </Menu>
+
+
+        <StackPanel DockPanel.Dock="Bottom">
+
+            <ListBox x:Name="smartphoneDetailsListBox" ItemsSource="{Binding Path=SmartphoneDetails}" Height="200"
+                     FontSize="18.667">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding Path=Name}" Foreground="Blue" />
+                            <TextBlock Text=" " />
+                            <TextBlock Text="{Binding Path=Value}" Foreground="DarkSlateGray" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+        <ListBox x:Name="smartphonesListBox" MouseDoubleClick="smartphonesListBox_MouseDoubleClick"
+                 ItemsSource="{Binding Path=smartphones, UpdateSourceTrigger=PropertyChanged}"
+                 SelectionChanged="SmartphonesListBox_OnSelected" SelectionMode="Extended" BorderThickness="3"
+                 Opacity="0.9" RenderTransformOrigin="11,11" FontSize="18.667">
+            <ListBox.Effect>
+                <DropShadowEffect BlurRadius="7" Color="#FF837640" />
+            </ListBox.Effect>
+            <ListBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FFC6C6D0" Offset="1" />
+                    <GradientStop Color="#FFE045C5" Offset="0.105" />
+                    <GradientStop Color="#FFD090CE" Offset="0.469" />
+                </LinearGradientBrush>
+            </ListBox.Background>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding Path=PictureLocation}" Width="32" Height="32" Stretch="UniformToFill" />
+                        <TextBlock Text="{Binding Path=Name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+
+    </DockPanel>
+</Window>
